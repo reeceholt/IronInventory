@@ -1,41 +1,48 @@
 package ui.windows;
 
-import backend.services.QuestionService;
+import backend.services.WorkoutService;
 import com.googlecode.lanterna.gui2.*;
-import models.Question;
+import models.Exercise;
+import models.Workout;
 import ui.UIController;
+
 
 import java.util.List;
 
-public class AllQuestionsWindow extends BasicWindow {
+
+public class AllWorkoutsWindow extends BasicWindow {
 
     private final UIController ui;
-    private final QuestionService service;
+    private final WorkoutService service;
 
-    public AllQuestionsWindow(UIController ui, QuestionService service) {
-        super("All Questions");
+
+    public AllWorkoutsWindow(UIController ui, WorkoutService service) {
+        super("All Workouts");
         this.ui = ui;
         this.service = service;
+
         setHints(List.of(Hint.CENTERED));
         setComponent(build());
     }
 
+
     private record MenuItem(String name, Runnable func) {
     }
 
+    //mehthod for workoutPage
     private Component build() {
         Panel panel = new Panel();
         panel.setLayoutManager(
-                new LinearLayout(Direction.VERTICAL)
+                new LinearLayout(Direction.VERTICAL) //new GridLayout(num Columns)
         );
-
-        List<Question> questions = service.getAllQuestions();
 
         ActionListBox alb = new ActionListBox();
         panel.addComponent(alb);
 
-        for (Question q : questions) {
-            alb.addItem(q.text(), () -> System.out.println(q.id()));
+        List<Workout> workouts = service.getAllWorkouts();
+
+        for (Workout w : workouts) {
+            alb.addItem(w.name(), () -> ui.showWorkoutPage(w.id()));
         }
         alb.addItem("Back", () -> ui.closeWindow(this));
 

@@ -1,9 +1,8 @@
 package ui;
 
-import backend.services.QuestionService;
+import backend.services.WorkoutService;
 import com.googlecode.lanterna.gui2.Window;
-import ui.windows.AllQuestionsWindow;
-import ui.windows.MainWindow;
+import ui.windows.*;
 
 /*
 Handles navigation
@@ -11,20 +10,35 @@ Handles navigation
 public class UIController {
 
     private final Gui gui;
-    private final QuestionService questionService;
+    private final WorkoutService workoutService;
 
-    public UIController(Gui gui, QuestionService questionService) {
+    public UIController(Gui gui, WorkoutService workoutService) {
         this.gui = gui;
-        this.questionService = questionService;
+        this.workoutService = workoutService;
     }
 
     public void showMainMenu() {
         gui.show(new MainWindow(this));
     }
 
-    public void showAllQuestionsPage() {
-        gui.show(new AllQuestionsWindow(this, questionService));
+    public void showAllWorkoutsPage() {
+        gui.show(new AllWorkoutsWindow(this, workoutService));
     }
+
+    public void showWorkoutPage(int workoutId){
+        gui.show(new WorkoutWindow(this, workoutService, workoutId));
+    }
+
+    public void showAllExercisesPage() {
+        gui.show(new AllExercisesWindow(this, workoutService));
+    }
+
+    public void showExercise(int exerciseId){
+        gui.show(new ExerciseWindow(this, workoutService, exerciseId));
+    }
+
+
+
 
     public void closeWindow(Window window) {
         window.close();
@@ -33,4 +47,6 @@ public class UIController {
     public void closeApp() {
         gui.close();
     }
+
+;
 }

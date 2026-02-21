@@ -1,6 +1,7 @@
 import backend.Database;
-import backend.repositories.QuestionRepo;
-import backend.services.QuestionService;
+import backend.repositories.ExerciseRepo;
+import backend.repositories.WorkoutRepo;
+import backend.services.WorkoutService;
 import ui.Gui;
 import ui.UIController;
 
@@ -26,15 +27,16 @@ public class App {
             Connection conn = db.getConnection();
 
             // Repositories
-            QuestionRepo questionRepo = new QuestionRepo(conn);
+            WorkoutRepo workoutRepo = new WorkoutRepo(conn);
+            ExerciseRepo exerciseRepo = new ExerciseRepo(conn);
 
             // Services
-            QuestionService questionService = new QuestionService(questionRepo);
+            WorkoutService workoutService = new WorkoutService(workoutRepo, exerciseRepo);
 
             // GUI
             Gui gui = new Gui();
             gui.start();
-            UIController ui = new UIController(gui, questionService);
+            UIController ui = new UIController(gui, workoutService);
             ui.showMainMenu();
 
         } catch (IOException e) {

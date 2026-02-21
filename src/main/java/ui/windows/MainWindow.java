@@ -30,9 +30,8 @@ public class MainWindow extends BasicWindow {
         );
 
         MenuItem[] menu = {
-                new MenuItem("Search Questions by Tag", this::NoOp),
-                new MenuItem("Add New Question", this::NoOp),
-                new MenuItem("View All Questions", ui::showAllQuestionsPage),
+                new MenuItem("View All Exercises", ui::showAllExercisesPage),
+                new MenuItem("View All Workouts", ui::showAllWorkoutsPage),
                 new MenuItem("Exit", ui::closeApp)
         };
 
