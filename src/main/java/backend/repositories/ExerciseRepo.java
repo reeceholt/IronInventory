@@ -32,12 +32,12 @@ public class ExerciseRepo {
         return exercises;
     }
 
-    public Exercise getExercise(int exerciseId) {
+    public Exercise getExercise(long exerciseId) {
         String query = "SELECT id, name, muscles FROM Exercises WHERE id = ?";
 
         try (PreparedStatement sql = conn.prepareStatement(query)) {
 
-            sql.setInt(1, exerciseId);
+            sql.setLong(1, exerciseId);
 
             try (ResultSet rs = sql.executeQuery()) {
                 if (rs.next()) {
@@ -54,6 +54,27 @@ public class ExerciseRepo {
         }
 
         return null;
+    }
+
+    public long addExercise(Exercise exercise) {
+        try (PreparedStatement sql = conn.prepareStatement("""
+                INSERT INTO exercises (name, muscles)
+                	VALUES (?, ?);
+                """)) {
+            sql.setString(1, exercise.name());
+            sql.setString(2, exercise.muscles());
+            int affectedRows = sql.executeUpdate();
+            if (affectedRows > 0) {
+                try (ResultSet rs = sql.getGeneratedKeys()) {
+                    if (rs.next()) {
+                        return rs.getLong(1);
+                    }
+                }
+            }
+            return -1L;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

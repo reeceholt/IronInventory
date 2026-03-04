@@ -28,12 +28,18 @@ public class UIController {
     public void showWorkoutPage(int workoutId){
         gui.show(new WorkoutWindow(this, workoutService, workoutId));
     }
+    public void showNewWorkoutPage(){
+        gui.show(new NewWorkoutWindow(this, workoutService));
+    }
+
 
     public void showAllExercisesPage() {
         gui.show(new AllExercisesWindow(this, workoutService));
     }
-
-    public void showExercise(int exerciseId){
+    public void showNewExercisePage() {
+        gui.show(new NewExerciseWindow(this, workoutService));
+    }
+    public void showExercise(long exerciseId){
         gui.show(new ExerciseWindow(this, workoutService, exerciseId));
     }
 

@@ -16,8 +16,6 @@ public class AllExercisesWindow extends BasicWindow {
     private final WorkoutService service;
 
 
-
-
     public AllExercisesWindow(UIController ui, WorkoutService service) {
         super("All Exercises");
         this.ui = ui;
@@ -26,13 +24,10 @@ public class AllExercisesWindow extends BasicWindow {
         setComponent(build());
     }
 
-
-
-
     private Component build() {
         Panel panel = new Panel();
         panel.setLayoutManager(
-                new LinearLayout(Direction.VERTICAL) //new GridLayout(num Columns)
+                 new GridLayout(2)
         );
 
         ActionListBox alb = new ActionListBox();
@@ -44,6 +39,7 @@ public class AllExercisesWindow extends BasicWindow {
             alb.addItem(e.name(), () -> ui.showExercise(e.id()));
 
         }
+        alb.addItem("Add New Exercise", () -> ui.showNewExercisePage());
         alb.addItem("Back", () -> ui.closeWindow(this));
 
         return panel;

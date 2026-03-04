@@ -44,6 +44,7 @@ public class AllWorkoutsWindow extends BasicWindow {
         for (Workout w : workouts) {
             alb.addItem(w.name(), () -> ui.showWorkoutPage(w.id()));
         }
+        alb.addItem("Add Workout",() -> ui.showNewWorkoutPage());
         alb.addItem("Back", () -> ui.closeWindow(this));
 
         return panel;

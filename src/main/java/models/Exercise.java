@@ -1,6 +1,6 @@
 package models;
 
-public record Exercise(int id, String name, String muscles) {
+public record Exercise(long id, String name, String muscles) {
 
     @Override
     public String muscles() {
@@ -8,7 +8,7 @@ public record Exercise(int id, String name, String muscles) {
     }
 
     @Override
-    public int id() {
+    public long id() {
         return id;
     }
 
