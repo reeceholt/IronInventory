@@ -12,9 +12,9 @@ public class ExerciseWindow extends BasicWindow {
 
     private final UIController ui;
     private final WorkoutService service;
-    private final int exerciseId;
+    private final long exerciseId;
 
-    public ExerciseWindow(UIController ui, WorkoutService service, int exerciseId) {
+    public ExerciseWindow(UIController ui, WorkoutService service, long exerciseId) {
         super("Exercises");
         this.ui = ui;
         this.service = service;
@@ -24,7 +24,7 @@ public class ExerciseWindow extends BasicWindow {
     }
 
 
-    private record MenuItem(String name, Optional<String> mucles, Runnable func) {
+    private record MenuItem(String name, Optional<String> muscles, Runnable func) {
     }
 
     private Component build() {

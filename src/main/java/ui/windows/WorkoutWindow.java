@@ -15,7 +15,7 @@ public class WorkoutWindow extends BasicWindow {
     private final int workoutId;
 
     public WorkoutWindow(UIController ui, WorkoutService service, int workoutId) {
-        super("Exercises");
+        super("Workout");
         this.ui = ui;
         this.service = service;
         this.workoutId = workoutId;

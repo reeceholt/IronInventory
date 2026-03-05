@@ -56,6 +56,17 @@ public class WorkoutRepo {
         return null;
     }
 
+    public void deleteWorkout(long id) {
+        String sql = "DELETE FROM exercises WHERE id = ?";
+
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setLong(1, id);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
 
 

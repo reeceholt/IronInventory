@@ -21,15 +21,19 @@ public class WorkoutService {
     }
     public Workout getWorkoutInfo(int id) {return repo.getWorkout(id);}
 
-//    public void setNewWorkoutInfo(int id) { repo.getNewWorkout();}
+    public void removeWorkout(long id){repo.deleteWorkout(id);}
 
     public List<Exercise> getAllExercises() { return exerciseRepo.getExercises(); }
     public Exercise getExerciseInfo(long id) {
         return exerciseRepo.getExercise(id);
     }
+    public List<String> getAllExerciseNames() {
+        return exerciseRepo.getExerciseNames();
+    }
     public long addExercise(Exercise exercise) {
         return exerciseRepo.addExercise(exercise);
     }
+    public void removeExercise(long id){exerciseRepo.deleteExercise(id);}
 
 
 }

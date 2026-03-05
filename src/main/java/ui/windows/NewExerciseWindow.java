@@ -24,7 +24,7 @@ public class NewExerciseWindow extends BasicWindow {
         setComponent(build());
     }
 
-    public Component build(){
+    private Component build(){
         Panel main = new Panel()
                 .setLayoutManager(new LinearLayout());
         TextBox exerciseInput = new TextBox().setPreferredSize(new TerminalSize(10, 1));

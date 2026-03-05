@@ -77,4 +77,25 @@ public class ExerciseRepo {
         }
     }
 
+    public List<String> getExerciseNames(){
+        List<Exercise> e = this.getExercises();
+        ArrayList<String> result = new ArrayList<String>();
+        for(Exercise exercise : e){
+            result.add(exercise.name());
+        }
+        return result;
+    }
+
+    public void deleteExercise(long id) {
+        String sql = "DELETE FROM exercises WHERE id = ?";
+
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setLong(1, id);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
 }
