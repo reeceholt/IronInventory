@@ -34,11 +34,22 @@ public class ExerciseWindow extends BasicWindow {
         );
 
         Exercise e = service.getExerciseInfo(exerciseId);
-        Button b = new Button("Back", () -> ui.closeWindow(this));
+        TextBox exerciseName = new TextBox(e.name());
+        TextBox muscles = new TextBox(e.muscles());
+        panel.addComponent(exerciseName);
+        panel.addComponent(muscles);
 
-        panel.addComponent(new Label(e.name()));
-        panel.addComponent(new Label(e.muscles()));
-        panel.addComponent(b);
+
+        panel.addComponent(new Panel().setLayoutManager(new GridLayout(2))
+                .addComponent(new Button("Back", () -> ui.closeWindow(this)))
+                .addComponent(new Button("Save", () ->
+                {
+                  service.changeExercise(new Exercise(exerciseId, exerciseName.getText(), muscles.getText()));
+                }
+
+                ))
+        );
+
 
         return panel;
     }

@@ -2,10 +2,12 @@ package ui.windows;
 
 import backend.services.WorkoutService;
 import com.googlecode.lanterna.gui2.*;
+import com.googlecode.lanterna.input.KeyStroke;
 import models.Exercise;
 import models.Workout;
 import ui.UIController;
 
+import java.sql.SQLOutput;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,6 +44,8 @@ public class AllExercisesWindow extends BasicWindow {
         panel.addComponent(deleteBox);
 
         List<Exercise> exercises = service.getAllExercises();
+
+
 
         for (int i = 0; i < exercises.size(); i++) {
             Exercise e = new Exercise(exercises.get(i));

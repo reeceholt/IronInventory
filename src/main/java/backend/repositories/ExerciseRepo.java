@@ -23,7 +23,7 @@ public class ExerciseRepo {
         try (PreparedStatement sql = conn.prepareStatement("Select id, name, muscles FROM Exercises Order by muscles ")) {
             try (ResultSet rs = sql.executeQuery()) {
                 while (rs.next()) {
-                    exercises.add(new Exercise(rs.getInt("id"), rs.getString("name"), rs.getString("muscles")));
+                    exercises.add(new Exercise(rs.getLong("id"), rs.getString("name"), rs.getString("muscles")));
                 }
             }
         } catch (SQLException e) {
@@ -42,7 +42,7 @@ public class ExerciseRepo {
             try (ResultSet rs = sql.executeQuery()) {
                 if (rs.next()) {
                     return new Exercise(
-                            rs.getInt("id"),
+                            rs.getLong("id"),
                             rs.getString("name"),
                             rs.getString("muscles")
                     );
@@ -97,5 +97,25 @@ public class ExerciseRepo {
         }
     }
 
+
+    public void updateExercise(Exercise exercise) {
+        try (PreparedStatement sql = conn.prepareStatement("""
+                UPDATE exercises
+                SET 
+                    name = ?,
+                    muscles = ?
+                WHERE 
+                    id = ?;
+                """)) {
+            sql.setString(1, exercise.name());
+            sql.setString(2, exercise.muscles());
+            sql.setLong(3, exercise.id());
+            sql.executeUpdate();
+
+//            return affectedRows > 0 ? exercise.id() : -1L;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 }

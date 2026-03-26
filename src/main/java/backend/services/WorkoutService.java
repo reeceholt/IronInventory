@@ -34,6 +34,7 @@ public class WorkoutService {
         return exerciseRepo.addExercise(exercise);
     }
     public void removeExercise(long id){exerciseRepo.deleteExercise(id);}
+    public void changeExercise(Exercise e){exerciseRepo.updateExercise(e);}
 
 
 }
